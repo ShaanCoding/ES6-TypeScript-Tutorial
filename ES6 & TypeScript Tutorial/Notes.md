@@ -150,3 +150,22 @@ for(var i = 0; i <= 5; i++) {
 * We can assign a default function parameter
 * function(value = 10, bonus = 5)
 * undefined, 30
+
+# 13. Rest Operator
+
+* Consider this example, we need a function that displays a list of colors;
+* This is bad as we cant pass parameters properly, and we use the arguments object which is unintuitive
+* We could do this with arguments and loop through them manually in the old way but in ES6 we can alternatively do:
+  * Alternatively we can use the rest operator, which is where we append ... in front of the variable to take it as an 'array' of arguments
+
+# 14. Spread Operator
+
+* Spread operator is kind of the opposite of the rest operator
+* While rest takes in a variable number of parameters nad puts it into an array, a rest spread operator takes an array and splits it into multiple elements.
+* Back to the previous example with the diplaycolors function, it takes multiple variables as a rest as an argument
+* Now lets say from a service / database we get an array of colors
+* Now if we try to pass an array into our rest operator it throws an error as it wants multiple operators, in this case a spread operator would be highly useful
+* A spread operator takes an array and spread it into individual elements
+* To use a spread operator, it is indentical to a rest operator we append three dots in front of the rest operator array
+* Rest operator is declared in the function declaration, whilst spread operator is declared in the function call
+
