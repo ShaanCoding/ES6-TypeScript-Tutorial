@@ -169,3 +169,60 @@ for(var i = 0; i <= 5; i++) {
 * To use a spread operator, it is indentical to a rest operator we append three dots in front of the rest operator array
 * Rest operator is declared in the function declaration, whilst spread operator is declared in the function call
 
+# 15. Object Literals Part 1
+
+* Consider two variables
+* If we want to make a object with our first name and last name we can do this
+```ts
+let firstName = "Shaan";
+let lastName = "Khan";
+
+//Lets say we want to make a new person object with this info
+
+let person = {
+    firstname: firstName,
+    lastname: lastName
+};
+
+console.log(person.firstname);
+console.log(person.lastname);
+
+```
+
+* What is listed above is what we usually do
+* The thing we did with the curly braces is called an object literal
+* In es6 we can use a shorthand to instead do
+```ts
+let person = {
+  firstname,
+  lastname
+};
+```
+* This assumes it just takes the variable firstname and lastname, and assigns these as the properties and value
+* We additionally can make functions that take names as an input which returns functions doing
+```ts
+return {firstname, lastname, fullname}
+
+let p = createPerson(firstname, lastname);
+```
+
+* Another short hand notation is when we are adding a method to our object
+* Traditionally we could make a function inside of the object like this
+```ts
+  isSenior: function(){
+            return age > 60;
+        }};
+```
+* Alternatively we can also instead do
+```ts
+    isSenior() {
+            return age > 60;
+        }
+```
+
+# 16. Object Literals Part 2
+
+* Alternatively for object literals we can have spaces in object properties, by assigning the variable as a string and then to access it instead of using . we instead use the array index [].
+  * I assume this is it automatically casting the "first name" string to a integer which the array then accesses or some magic similar to this in the background
+* We can also use variables as property names
+* This also looks like INCREDIBLY BAD PRACTICE SO NEVER DO THIS
