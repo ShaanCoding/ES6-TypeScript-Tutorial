@@ -226,3 +226,64 @@ let p = createPerson(firstname, lastname);
   * I assume this is it automatically casting the "first name" string to a integer which the array then accesses or some magic similar to this in the background
 * We can also use variables as property names
 * This also looks like INCREDIBLY BAD PRACTICE SO NEVER DO THIS
+
+# 17. Destructuring Arrays
+
+* To destructure is to destroy the structure or dismantle something
+* In this tutorial we will show how to destructure an array
+* To do this we pull apart the elements of an array
+* If we make an array ['Variable A', 'Variable B', 'Variable C']
+* and then we do let [fname, lname, gender] = array
+* we automatically destructure the array
+```ts
+let employee = ["Shaan", "Khan", "Male"];
+let [fname, lname, gender] = employee;
+```
+* If we have a unequal number of pairings the last one will be undefined
+* Alternatively we can also can admit variables to the left hand side, we just leave it with a blank commar
+
+* We can additionally destructure an array using the rest operator, which will assign first one to fname and the remaining values into an array
+```ts
+let [fname, ...elements] = employee;
+Shaan, [Khan, Male]
+```
+
+* We additionally can use default values through =
+
+# 18. Destructuring Objects
+
+* For the most part we can destructure objects the same as arrays
+* However one significant difference is instead of square brackets, we have to use curly brackets instead.
+
+* Alternatively if the property name was huge i.e 20 fields in length we can alternatively use an alias, to use an alias we add a colon
+
+# 19. String Templates
+
+* In ES6 we have a thing called string templates which allows us to convinently work with strings
+* To normally do a string concatination we would have to do
+```ts
+let greet = "Welcome" + user + " to ES2015";
+```
+* Alternatively with string templates we can bypass this requirement of concataination
+* We are required to quote text with backticks and to declare a variable we do ${variable}
+```ts
+let greet = `Welcome ${user} to ES2015`
+```
+* Another benefit is that it support multi-line strings without requiring concatination (\n)
+
+# 20. For of Loop
+
+* In ES2015, we also have a new for of statement (similar to for loop but used for iterables)
+* In this lesson we will be using this for arrays and strings
+* This is a for-each loop (in C#)
+```ts
+let colors = ['Red', 'Blue', 'Green'];
+
+// for(let index in colors) {
+//     console.log(colors[index]);
+// }
+
+for(let color of colors) {
+    console.log(color);
+}
+```
