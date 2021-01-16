@@ -6,7 +6,7 @@ let ln = "last name";
 
 let person = {
     "first name": "Shaan",
-    [ln]: "Khan";
+    [ln]: "Khan"
 }
 
 console.log(person["first name"]);

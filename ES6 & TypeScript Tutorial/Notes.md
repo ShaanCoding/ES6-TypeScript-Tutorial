@@ -287,3 +287,51 @@ for(let color of colors) {
     console.log(color);
 }
 ```
+
+# 21. Classes
+
+* In this tutorial we will be learning about classes
+* To define a class we do
+```ts
+class Person{}
+```
+* If we log the typeof class (person) we get the response of a function
+* Classes are just special functions that ARE NOT HOISTED
+* So if we try to use the Person class before it is initalized we cannot run it, because they're not hoisted unlike functions
+
+* Now consider a method inside of the class
+```ts
+console.log(p.greet === Person.prototype.greet);
+```
+* Adding a method to the class is identical to adding a object to the prototype class of the object
+
+# 22. Class Body & Method Definitions
+
+* A class body is the area between the curly braces
+* In ES2015 & TypeScript, a class body can only contain methods and not properties
+* We can have three main types of properties; constructor methods (initalizers), we can make a static method (one that can be used without instanciating the class), and a dynamic / normal method / prototype
+
+# 23. Class Inheritance
+
+* In ES2015, class inheritance is possible via the extends keyword
+* This is to make a new class which extends from the parent class
+* We do this with the extends keyword
+```ts
+class Person {
+    constructor() {
+        console.log("Person constructor");
+    }
+}
+
+class Employee extends Person {
+
+}
+
+let e = new Employee();
+```
+
+* If we now want to make an inherited class with a constructor, we must also call the super classes constructor, to do this we call super
+
+* We can access super class functions from the subclass
+* If we have two functions, one in the super class and one in the subclass with the same function we will get firstly the subclass, and if it doesn't exist the superclass
+* Alternatively we could also use the appendation super.getID()
