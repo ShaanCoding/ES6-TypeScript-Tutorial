@@ -335,3 +335,13 @@ let e = new Employee();
 * We can access super class functions from the subclass
 * If we have two functions, one in the super class and one in the subclass with the same function we will get firstly the subclass, and if it doesn't exist the superclass
 * Alternatively we could also use the appendation super.getID()
+
+# 24. Modules
+
+* Now if you go through any book, you'll see an author divdes each thing into chapters and sections. This allows the reader to understand the progression and find specific parts, as well as clearly indicate what the focus is on
+* This is the es6 equivilant of seperate class files / libraries
+* This allows us to achieve seperation of concern
+* To import a function from module b we import it
+* To send a function from module b and get it used in module a we export it
+
+
