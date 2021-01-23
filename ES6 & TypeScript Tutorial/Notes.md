@@ -595,3 +595,149 @@ myMap.has("fname");
 ```ts
 myMap.delete("fname");
 ```
+
+# 33. Iterating Over Maps
+
+* In the last video we learnt how to make a new map and add values on a new map using key value pairs
+* Another way to add values to a map is adding an array during intalization
+
+```ts
+let myMap = new Map([
+    ["fname", "Shaan"],
+    ["lname", "Khan"]
+]);
+
+//How do we iterate over the keys
+
+for(let key of myMap.keys()) {
+    console.log(key);
+}
+
+for(let value of myMap.values()) {
+    console.log(value);
+}
+
+for(let entry of myMap.entries()) {
+  console.log(`${entry[0]} -> ${entry[1]}`)
+}
+```
+
+//We can also make use of destructuring
+
+```ts
+for(let [key, value] of myMap.entries()) {
+  console.log(`${key} -> ${value}`);
+}
+```
+
+# 34. forEach
+
+* In ES5 we have the foreach loop which allows us to iterate over array elements
+
+```ts
+var numbers = [2, 4, 6, 8];
+
+const arrayFunction(element, index, array) {
+    console.log(`arr[${index}] = ${element}`);   
+}
+
+numbers.forEach(arrayFunction);
+
+let myMap = new Map([
+  ["fname", "Shaan"],
+  ["lname", "Khan"],
+]);
+
+const mapFunction = function (value, key, callingMap) {
+  console.log(key + " " + value);
+  console.log(myMap === callingMap);
+};
+
+myMap.forEach(mapFunction);
+
+let mySet = new Set([1, 2, 3]);
+
+const setFunction = function (value, key, callingSet) {
+  console.log(key + " " + value);
+  console.log(mySet === callingSet);
+};
+
+mySet.forEach(setFunction);
+```
+
+# 35. WeakMaps
+
+* Like weaksets in ES6, we also have weakmaps, weakmaps only take in objects / non-primativ es and once all references are gone it deletes / removes it from the map
+
+```ts
+let myMap = new WeakMap();
+
+let ob1 = {};
+
+myMap.set(ob1, "Hello World!");
+
+console.log(myMap.get(ob1));
+
+ob1 = null;
+```
+
+# 36. Symbols
+
+* In ES5 we have existing primitive types; string, num, boolean, null & undefined
+* Now in ES6 we also have a new one called Symbol
+* The purpose of a symbol is to generate a unique ID
+* Funny thing is we don't have access to this unique ID
+
+* We will see how to create a new symbol and possible uses of it
+
+```ts
+let s = Symbol();
+console.log(typeof s);
+
+let s2 = Symbol("First Symbol");
+
+console.log(s2.toString()); //Symbol(First Symbol)
+
+let s3 = Symbol();
+let s4 = Symbol();
+
+console.log(s3 === s4); //False
+
+// A symbol always create a unique ID
+
+let s5 = Symbol("Test");
+let s6 = Symbol("Test");
+
+console.log(s5 === s6); //False regardless of description
+
+//Lets say we've created a new symbol but we want to use it again in a new file / same project
+//We have a thing called a symbol registry
+
+let s7 = Symbol.for("RegSymbol");
+
+//Symbol.for doesn't add the symbol right away, it checks if it exists first
+//If it does it will return the symbol
+//If it doesn't exist it will create a new one
+
+let s8 = Symbol.for("RegSymbol");
+
+console.log(s7 === s8);
+
+//Now lets say we wanted the key when the symbol was added to global registry
+//Symbol .keyfor
+
+console.log(Symbol.keyFor(s8));
+
+let fname = Symbol();
+
+let person = {
+  [fname]: "Shaan",
+};
+
+//Now if we do this, we don't have to worry about our code being overwritten since our code will be unique
+
+console.log(Object.getOwnPropertyNames(person));
+//We don't get the property listed out since it's a symbol
+
+console.log(Object.getOwnPropertySymbols(person));
+```
