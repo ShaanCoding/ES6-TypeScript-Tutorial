@@ -344,4 +344,254 @@ let e = new Employee();
 * To import a function from module b we import it
 * To send a function from module b and get it used in module a we export it
 
+```ts
+import a;
 
+export a;
+```
+
+# 25. Module Loader Setup
+
+* When dealing with modules there's two things to keep in mind, the module syntax (which is the main thing to keep in mind) additionally there is module loading
+* We need to find a way to load the modules into our browser
+
+* To load a module you can now do:
+
+```html
+<script src="/src/moduleA.js" type="module"> </script>
+```
+
+# 26. Named Exports
+
+* In ES6 there are two typed of exports, named and default
+* In this video we will focus on named exports
+
+* We make module A and add a variable called fname, lets say we want to use it into another module
+
+* We firstly append export
+```ts
+export let fname = "Shaan";
+```
+
+* Now lets say we want to add it to module B
+```ts
+import {fname} from './moduleB.js';
+```
+
+* Now if we log it we can see that it is recorded into the log
+* To add multiple imports we just add them like an array with just commars
+
+* Now lets say we want to import 10 or 20 variables, in this case instead of saying export 10 or 20 times we instead can do one export
+
+```ts
+let fname = "Shaan";
+let lname = "Khan";
+
+export {fname, lname};
+```
+
+* Alternatively we can also import via alias
+
+```ts
+import {fname as f} from './moduleB.js';
+```
+
+* Another thing to consider about imports, is that module imports are hoisted
+* This kind of makes sense as moduleB needs to run and declare variables before it is even used, so hoisting is kind of a necessity
+
+* Imports are READONLY, however we can change the properties of objects
+  * I suspect this is because of stack / heap reasonings
+
+# 27. Default Exports
+
+* Whenever we have modules where we export a single value or function we can make use of the default keyword when exporting
+
+```js
+let fname = "Shaan";
+
+export default fname;
+```
+
+* We can leave out curly braces when importing and the name doesn't have to match
+
+```ts
+import firstName from './moduleB.js';
+```
+
+* We can also import defaults with aliases
+
+```ts
+import {default as f} from './moduleB.js';
+```
+
+# 28. Exporting Functions & Classes
+
+* We make a new function in moduleB:
+
+```ts
+export const greet = function(message) {
+  console.log(message);
+}
+```
+
+* Now for module A
+
+```ts
+import {greet} from './moduleB.js';
+
+greet("Hello World!");
+```
+
+* Importing classes
+
+```ts
+export class GreetMessage {
+    constructor() {
+        console.log("Constructor");
+    }
+
+    greet() {
+        console.log("Greet function");
+    }
+}
+```
+
+* We import it normally, and we make a new class with
+
+```ts
+let gm = new GreetMessage();
+```
+
+# 29. Sets & Maps
+
+* In this video we will explore what is maps and what is sets and what are their pitfalls
+
+* Sets:
+  * A set is a list of values, which CANNOT contain duplicates
+  * Instead of accessing specific elements, sets check if a value exists or not
+  
+* Maps:
+  * A map is nothing but a value of key-value pairs
+  * With maps unlike sets, we can actually retrieve the values
+
+# 30. Sets
+
+* A set is a set of datavalues which are unique
+
+```ts
+let mySet = new Set();
+//To add new items
+mySet.add("Hello");
+//To check size
+mySet.size
+```
+
+* These are generics / can accept multiple different types of data types
+* Unlike the previous example in lesson 29, since these properties ARENT converted into strings, obj1 and obj2 are going to be unique between each other
+
+```ts
+//We can add items through the consturctor
+let mySet = new Set([1,2,3,4,4]);
+//This will only count 4 elements, as the second 4 is ignored.
+```
+
+* We can also chain adding of sets on the constructor, through the .add method;
+
+* We can check if a value exists through the .has method
+
+```ts
+console.log(newSet.has(5)); //True / false
+```
+
+* We can also delete elements, through the .delete function
+
+```ts
+newSet.delete(1);
+```
+
+# 31. WeakSets
+
+* In lesson 30 we went through sets otherwise known as a strongset in the way it stores object references
+
+```ts
+let mySet = new Set();
+
+let key = {};
+mySet.add(key);
+
+console.log(mySet.size); //1
+
+key = null;
+
+console.log(mySet.size); //1
+
+//What we can infer even if the key is set to null, a reference to the key object still exists from our set
+
+key = [...mySet][0]; //Gives us back our object
+
+//Sometimes we wish our references in our set dissapear when our references dissapear to avoid memory leaks
+
+//ES6 adds weakset, it's got add, has and delete but
+//It can only store object references & non-primitave values
+//Object values are weak
+//If all references are removed, it starts garbage selection
+
+let set = new weakSet();
+
+let key2 = {};
+
+set.add(key2);
+
+console.log(set.has(key2)); //True
+
+key2 = null;
+
+//Not even possible to check because it already cleans it
+
+//Weakset > Strongset is only good because it handles memory well
+//Weaksets are preferred if we are only tracking objects
+```
+
+# 32. Maps
+
+* Sets are good to check if they are duplicates
+* BUt if we need to check if they are duplicates we need a map type
+* Map is an ordered list of key-value pairs
+* Both the key and value can be of any type
+
+* To create a new map
+
+```ts
+let myMap = new Map();
+//To add an item
+//Key - value pair
+myMap.set("fname", "Shaan");
+myMap.set("age", 30);
+
+//To get a value
+console.log(myMap.get("fname"));
+```
+
+* We can also do this with objects
+
+```ts
+let ob1 = {};
+let ob2 = {};
+
+myMap.set(ob1, 10);
+myMap.set(ob2, 20);
+```
+
+* To get size we can do .size
+* To see if a key exists we can do .has
+
+```ts
+//We have to check via key
+myMap.has("fname");
+```
+
+* There is also a delete method
+
+```ts
+myMap.delete("fname");
+```
