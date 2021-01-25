@@ -741,3 +741,220 @@ console.log(Object.getOwnPropertyNames(person));
 
 console.log(Object.getOwnPropertySymbols(person));
 ```
+
+# 37. Symbol Iterator
+
+* Recall a concept of a thing on previous tutorial, the for..of loop
+* This doesn't work with every object
+* For the for of to work it needs an iterator method
+* We need to check if the object has an iterator by checking if it has the key Symbol.Iterator
+* As we can see, arrays and strings have iterator functions
+
+# 38. Iterables and Iterators
+
+* In ES6 we can implement iteration which is a new way to tranverse data. This focuses on two things, iterables and iterators
+* An iterable is an object that implements the method whos key is Symbol.iterators
+```ts
+  Iterable {\
+  [Symbol.Iterator]() : Iterator}
+
+  Iterator {
+    next() : IResultObj
+  }
+
+  IResultObj {
+    value: any;
+    done: bool;
+  }
+  ```
+* The iterable is the interface
+* The way it transverses is the iterator
+* The object has a bool checking if the array is done being transversed and the object
+
+* Array, Strings, Maps & Sets are all iterables
+* In this tutorial we will be making our own iterable
+
+# 39. Iterating Objects
+
+* The for-of loop doesn't work for the object
+* So how do we make the person object iterable
+
+# 40. Generators
+
+* Generators are a new feature in ES6
+* Once a function starts execution it will always run to completion before any other code is run
+* Generators can be paused part way run another function and then resume
+* The pausing of this function is done through the `yield` keyword
+* The syntax of a generator is very alike a function
+
+```ts
+function *createGenerator() {
+  yield 1; //Yield the value 1 and then execution pause
+  console.log("After 1st yield");
+  yield 2; //Will then run the next two lines once resumed again
+
+  //With every execution it will hit the next yield point
+}
+
+let myGen = createGenerator();
+
+console.log(myGen.next());
+console.log(myGen.next());
+console.log(myGen.next());
+```
+
+* What do we use generators for
+* Returns an object for the same next one, which is used for for-of loops
+* This can be used to simplify a for-of loop for custom iterators, this could be used to make an iterator for a custom object
+
+```ts
+person[Symbol.iterator] = function*() {
+  let properties = Object.keys(person);
+
+  for(let t of properties) {
+    yield this[t];
+  }
+};
+
+for(let p of person) {
+  console.log(p);
+}
+```
+
+# 41. Enter TypeScript
+
+* Typescript is the typed superset that compiles into javascript
+* Data types can now be used of when writing our code, but specifying data types is completely optional
+* Why would we code in typescript?
+  * Javascript is very hard to identify mistakes due to it not being typed, typescript solves this issue
+
+# 42. Declarations and Annotations
+
+* In this tutorial we will show the ways to declare variables in typescript
+
+```ts
+//Variable, identifyer, assignment, value
+var x = 10;
+
+//Type inferencing in typescript
+var x2: number = 10;
+
+var y = "hi";
+var z = true;
+
+var a: number = 200; 
+```
+
+# 43. Type Inference
+
+* In the last video we learnt of type inferencing
+
+```ts
+var n1 = 10;
+
+n1 = "Hi"; //Typescript inferred this would be of type number
+
+//if we instead want to change this we can make it a any type
+
+var n1: any = 10;
+
+//It is however not always reliable
+
+var n2 = n1 + 10;
+//We assume this accepts numeric values
+var n2 = n1 + "Hello"; //The type has now changed to string
+console.log(n2); //10Hello
+```
+
+# 44. Any Type
+
+* Typescript features a new data type called any type
+* By using an any type this allows the function to run without any compile time checking, so it can hold all values without errors
+
+```ts
+var info: any;
+info = 10;
+info = true;
+info = "Hello World!";
+info = undefined;
+```
+
+# 45. Enumeration
+
+* Enumerations are types that are used to give things names for enumeration values
+
+```ts
+enum ColorsEnum {
+  Brown = 1, //0 = 1 makes 1,2,3
+  Black = 5, //1
+  Blue = 10//2
+};
+
+var myEyeColor : ColorsEnum = EyeColor.Black;
+console.log(myEyeColor); //1
+console.log(ColorsEnum[myEyeColor]); //Brown
+```
+
+# 46. Arrays & Tuples
+
+There are two ways to declare arrays
+
+```ts
+let strArr1: string[] = ['Hello', 'World'];
+let strArr2: Array<string> = ['Hello', 'World'];
+
+let anyArr: any[] = ['Hello', 10, true];
+
+//Lets say we want an array that wants to hold string and numeric values, this is called a tuple
+
+let myTuple: [string, number] = ['Hello', 10];
+console.log(myTuple[0]);
+console.log(myTuple[1]);
+```
+
+# 47. Class Constructors
+
+* 
+
+```ts
+class Person {
+  public fname: string;
+  public lname: string;
+
+  constructor(fname: string, lname: string) {
+    this.fname = fname;
+    this.lname = lname;
+  }
+};
+
+class Person1 {
+  constructor(public fname: string, public lname: string) {
+
+  }
+}
+```
+ 
+ # 48. Interfaces
+
+* Interfaces are the most flexible way of implementing types in typescript
+* Interfaces are important and since their wiped when compiled into javascript we don't have to worry about the overhead
+
+```ts
+interface Person {
+  fname: string;
+  lname: string;
+  age?: number; // If we add a ? we make it a nullable type which makes it optional
+};
+
+let employee1: Person = {
+  fname: "Shaan",
+  lname: "Khan",
+  age: 19
+}
+
+let employee1: Person = {
+  fname: "Shaan",
+  lname: "Khan",
+  // Leaving this empty makes an error, the interface must be present
+}
+```

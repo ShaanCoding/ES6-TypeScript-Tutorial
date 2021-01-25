@@ -8,16 +8,16 @@
 
 // export {fname, lname};
 
-export const greet = function(message) {
-    console.log(message);
-  }
+export const greet = function (message) {
+  console.log(message);
+};
 
 export class GreetMessage {
-    constructor() {
-        console.log("Constructor");
-    }
+  constructor() {
+    console.log("Constructor");
+  }
 
-    greet() {
-        console.log("Greet function");
-    }
+  greet() {
+    console.log("Greet function");
+  }
 }
